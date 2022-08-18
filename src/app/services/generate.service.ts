@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { Iseverity, IsumOut } from '../utils/interfaces';
+import { Isettings, IsumOut } from '../utils/interfaces';
 
 // Beginning with Angular 6.0, the preferred 
 // way to create a singleton service is to 
@@ -19,7 +19,7 @@ export class SumGenerationProvider {
 
     constructor() { }
 
-    generate(o: Iseverity): IsumOut {
+    generate(o: Isettings): IsumOut {
         return this.simple();
     }
 

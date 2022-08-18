@@ -2,6 +2,13 @@ ion-grid {
     height: 100%;
   
     .main {
-      height: 75%;
+      height: 50%;
+      font-size:1.5em;
+    }
+
+    .score {
+      height: 12.5%;
+      text-align: center;
+      font-size:1.5em;
     }
   }

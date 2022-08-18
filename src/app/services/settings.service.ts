@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { Iseverity } from '../utils/interfaces';
+import { Isettings } from '../utils/interfaces';
 
 // Beginning with Angular 6.0, the preferred 
 // way to create a singleton service is to 
@@ -12,16 +12,16 @@ import { Iseverity } from '../utils/interfaces';
     providedIn: 'root',
 })
 export class SettingsProvider {
-    mSettings:Iseverity;
+    mSettings:Isettings;
 
     constructor() { }
 
-    save(o: Iseverity) {
-        this.mSettings = o && _.assign(this.mSettings, o);
-
+    save(o: Isettings) {
+        // this.mSettings = o && _.assign(this.mSettings, o);
+        this.mSettings = o;
     }
 
-    load(): Iseverity {
+    load(): Isettings {
         return this.mSettings;
     }
 }

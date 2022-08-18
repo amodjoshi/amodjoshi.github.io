@@ -10,7 +10,7 @@
   <ion-grid>
     <!-- Main sum area -->
     <ion-row class="main">
-      <ion-col>
+      <ion-col class="ion-align-self-center">
         {{sum}}
       </ion-col>
     </ion-row>
@@ -18,20 +18,50 @@
     <!-- Buttons -->
     <ion-row>
       <ion-col>
-        <ion-button color="primary" expand="full" (click)="onAnsClick(0)">{{spoofs[0]}}</ion-button>
+        <ion-button
+          [disabled]="isDisabled()" 
+          color="primary" 
+          expand="full" 
+          (click)="onAnsClick(0)">{{spoofs[0]}}
+        </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="primary" expand="full" (click)="onAnsClick(1)">{{spoofs[1]}}</ion-button>
+        <ion-button 
+          [disabled]="isDisabled()"  
+          color="primary" 
+          expand="full" 
+          (click)="onAnsClick(1)">{{spoofs[1]}}
+        </ion-button>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button color="primary" expand="full" (click)="onAnsClick(2)">{{spoofs[2]}}</ion-button>
+        <ion-button
+          [disabled]="isDisabled()"  
+          color="primary" 
+          expand="full" 
+          (click)="onAnsClick(2)">{{spoofs[2]}}
+        </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="primary" expand="full" (click)="onAnsClick(3)">{{spoofs[3]}}</ion-button>
+        <ion-button 
+          [disabled]="isDisabled()"
+          color="primary" 
+          expand="full" 
+          (click)="onAnsClick(3)">{{spoofs[3]}}
+        </ion-button>
       </ion-col>
+    </ion-row>
+
+    <!-- Score -->
+    <ion-row class="score">
+      <ion-col class="ion-align-self-center">{{calcScore()}}</ion-col>
+    </ion-row>
+
+    <!-- Attempted -->
+    <ion-row class="score">
+      <ion-col class="ion-align-self-center">{{calcDone()}}</ion-col>
     </ion-row>
   </ion-grid>
 
