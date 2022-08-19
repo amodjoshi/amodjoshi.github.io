@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { SettingsProvider } from '../services/settings.service';
 import { SumGenerationProvider } from '../services/generate.service';
-import { Isettings, IsumOut } from '../utils/interfaces';
+import { Isettings, IsumOut, IlogSum } from '../utils/interfaces';
 import * as _ from 'lodash';
 import { EventsService } from '../services/events.service';
+import { LoggerProvider } from '../services/logger.service ';
+
 
 @Component({
   selector: 'app-tab1',
@@ -29,6 +31,7 @@ export class Tab1Page {
     private _sp: SettingsProvider,
     private _gen: SumGenerationProvider,
     private _events: EventsService,
+    private _logger:LoggerProvider
   ) {
     this.mCorrects = 0;
     this.mDone = 0;
@@ -57,7 +60,10 @@ export class Tab1Page {
     this.mSettingsCfg.numAttempted = this.mDone;
     if (_.isEqual(this.ans_btn_idx, btn_number)) {
       this.mCorrects += 1;
+    } else {
+      this.logSum(this.spoofs[btn_number]);
     }
+
     this.mSettingsCfg.numCorrect = this.mCorrects;
     this._sp.save(this.mSettingsCfg);
 
@@ -105,5 +111,15 @@ export class Tab1Page {
       done = `Done = ${perDone}%`
     }
     return done;
+  }
+
+  // Log incorrects
+  logSum(incorrect) {
+    let o: IlogSum = {
+      sum: this.mSum.sum,
+      ans: this.mSum.ans,
+      pressed: incorrect
+    }
+    this._logger.log(o);
   }
 }

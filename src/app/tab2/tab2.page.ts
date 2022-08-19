@@ -1,9 +1,11 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { SettingsProvider } from '../services/settings.service';
-import { Isettings } from '../utils/interfaces';
+import { IlogSum, Isettings } from '../utils/interfaces';
 import * as _ from 'lodash';
 import { EventsService } from '../services/events.service';
+import { Platform } from '@ionic/angular';
+import { LoggerProvider } from '../services/logger.service ';
 
 @Component({
   selector: 'app-tab2',
@@ -20,14 +22,17 @@ export class Tab2Page {
     numCorrect: 0,
     numAttempted: 0
   }
+  isModalOpen = false;
+  logs:IlogSum[];
 
   constructor(
     private router: Router,
     private _sp: SettingsProvider,
     private _events: EventsService,
-    private _ngZone: NgZone
+    private _ngZone: NgZone,
+    private _logger: LoggerProvider
   ) {
-    
+
   }
 
 
@@ -51,6 +56,7 @@ export class Tab2Page {
   onToggleChange($event) {
 
     if ($event.target.checked) {
+      this._logger.clear();
       _.set(this.mSettingsCfg, 'numCorrect', 0);
       _.set(this.mSettingsCfg, 'numAttempted', 0);
       _.set(this.mSettingsCfg, 'isSessionActive', true);
@@ -72,4 +78,15 @@ export class Tab2Page {
     console.log(`Count - ${this.countSums}`);
     _.set(this.mSettingsCfg, 'numSums', this.countSums);
   }
+
+  setOpen(isOpen:boolean) {
+    this.logs = this._logger.read();
+    this.isModalOpen = isOpen;
+  }
+
+  isDisabled() {
+    this.logs = this._logger.read();
+    return _.size(this.logs) === 0;
+  }
+
 }

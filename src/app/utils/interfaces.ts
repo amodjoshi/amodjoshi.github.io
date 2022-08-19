@@ -11,3 +11,9 @@ export interface IsumOut {
     ans: number;
     spoofs: number[];
 }
+
+export interface IlogSum {
+    sum:string;
+    ans:number;
+    pressed:number;
+}
